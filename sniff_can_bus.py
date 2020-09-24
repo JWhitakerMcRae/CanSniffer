@@ -20,7 +20,7 @@ import sys
 
 def can_up(baud=500000):
     print("Bringing up CAN0 with BAUD {} ...".format(baud))
-    os.system("sudo /sbin/ip link set can0 up type can bitrate 500000")
+    os.system("sudo /sbin/ip link set can0 up type can bitrate {}".format(baud))
     time.sleep(0.1)
 
 
