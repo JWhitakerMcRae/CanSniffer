@@ -9,12 +9,14 @@ Sniffer for CAN bus using the PiCAN2 HAT for the Raspberry Pi 3 B+.
 ## Installation:
 1. Ensure Python 3 (and Pip 3) is installed:  
 	`sudo apt install python3 python3-pip`
+1. Ensure git is installed:  
+	`sudo apt install git`
 1. Add the following to the /boot/config.txt file and reboot:  
 	`dtparam=spi=on`  
 	`dtoverlay=mcp2515-can0-overlay,oscillator=16000000,interrupt=25`  
 	`dtoverlay=spi-bcm2835-overlay`
 1. Clone this repo to your device:  
-	`git clone https://github.com/JWhitakerMcRae/CanSniffer.git`
+	`git clone https://github.com/JWhitakerMcRae/CanSniffer.git`  
 	`cd ~/CanSniffer`
 1. Install required pip packages  
 	`pip3 install -r requirements.txt`
