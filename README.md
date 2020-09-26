@@ -23,7 +23,7 @@ Sniffer for CAN bus using the PiCAN2 HAT for the Raspberry Pi 3 B+.
 1. Run!    
 	`./sniff_can_bus.py --baud=<value>`
 
-**NOTE:** Run `./sniff_can_bus.py --help` to see optional parameters.
+**TIP:** Run `./sniff_can_bus.py --help` to see optional parameters.
 
 Created in part using example code (with the same MIT license) found in:  
 [https://github.com/skpang/PiCAN-Python-examples](https://github.com/skpang/PiCAN-Python-examples)
