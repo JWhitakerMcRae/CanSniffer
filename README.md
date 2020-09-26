@@ -28,5 +28,5 @@ Sniffer for CAN bus using the PiCAN2 HAT for the Raspberry Pi 3 B+.
 Created in part using example code (with the same MIT license) found in:  
 [https://github.com/skpang/PiCAN-Python-examples](https://github.com/skpang/PiCAN-Python-examples)
 
-There is also a very cool case designed by GrodanB that you can 3D print for this project:  
+There is also a very cool case designed by [GrodanB](https://www.thingiverse.com/grodanb/designs) that you can 3D print for this project:  
 [https://www.thingiverse.com/thing:3409057](https://www.thingiverse.com/thing:3409057)
