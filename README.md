@@ -20,7 +20,9 @@ Sniffer for CAN bus using the PiCAN2 HAT for the Raspberry Pi 3 B+.
 	`cd ~/CanSniffer`
 1. Install required pip packages  
 	`pip3 install -r requirements.txt`
-1. Run!    
+
+## Usage:
+1. Capture CAN data for attached bus at baud `<value>`, format is `timestamp | arbitration id | dlc | data bytes`:
 	`./sniff_can_bus.py --baud=<value>`
 
 **TIP:** Run `./sniff_can_bus.py --help` to see optional parameters.
