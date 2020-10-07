@@ -48,12 +48,14 @@ if __name__ == "__main__":
     start_time = time.time()
     running = True
     try:
+        print(' Timestamp         | ID       | Data ->')
+        print('+------------------+----------+------------------------+')
         while running:
             message = bus.recv()    # wait until a message is received.
-            c = '{0:f} {1:x} {2:x} '.format(message.timestamp, message.arbitration_id, message.dlc)
+            c = '{:f} | {:08x} | '.format(message.timestamp, message.arbitration_id)
             s=''
             for i in range(message.dlc ):
-                s +=  '{0:x} '.format(message.data[i])
+                s +=  '{:02x} '.format(message.data[i])
             print(' {}'.format(c+s))
             # Check for end of capture period (if set)
             if args.length:
@@ -63,7 +65,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print('\n\rKeyboard interrupt detected.')
     except BaseException as err:
-        print("\n\rCaugh unknown exception: {}".format(err))
+        print("\n\rCaught unknown exception: {}".format(err))
         can_down()
         sys.exit(os.EX_PROTOCOL)
     can_down()

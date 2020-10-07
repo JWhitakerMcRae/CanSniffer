@@ -20,7 +20,7 @@ import os
 
 print('\n\rCAN Rx test')
 print('Bring up CAN0....')
-os.system("sudo /sbin/ip link set can0 up type can bitrate 500000")
+os.system("sudo /sbin/ip link set can0 up type can bitrate 250000")
 time.sleep(0.1)    
 
 try:
