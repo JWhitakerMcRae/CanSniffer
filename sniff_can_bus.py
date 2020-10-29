@@ -14,20 +14,10 @@
 import argparse
 import can
 import os
-import time
 import sys
+import time
 
-
-def can_up(baud=500000):
-    print("Bringing up CAN0 with BAUD {} ...".format(baud))
-    os.system("sudo /sbin/ip link set can0 up type can bitrate {}".format(baud))
-    time.sleep(0.1)
-
-
-def can_down():
-    print("Bringing down CAN0 ...")
-    os.system("sudo /sbin/ip link set can0 down")
-    time.sleep(0.1)
+from common import can_up, can_down
 
 
 if __name__ == "__main__":
