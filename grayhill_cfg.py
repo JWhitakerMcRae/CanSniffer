@@ -81,7 +81,7 @@ if __name__ == "__main__":
         bus.send(msg)
         time.sleep(0.1)
     except BaseException as err:
-        print("\n\rFailed to send write configuration message(s)! Exception: {}".format(err))can_down()
+        print("\n\rFailed to send write configuration message(s)! Exception: {}".format(err))
         can_down()
         sys.exit(os.EX_UNAVAILABLE)
     # Bring down CAN0 interface before exit
