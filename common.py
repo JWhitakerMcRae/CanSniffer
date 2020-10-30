@@ -25,3 +25,11 @@ def can_down():
     print("Bringing down CAN0 ...")
     os.system("sudo /sbin/ip link set can0 down")
     time.sleep(0.1)
+
+
+def print_can_msg(msg):
+    c = "{:f} | {:08x} | ".format(msg.timestamp, msg.arbitration_id)
+    s=""
+    for i in range(msg.dlc):
+        s +=  "{:02x} ".format(msg.data[i])
+    print(" {}".format(c+s))

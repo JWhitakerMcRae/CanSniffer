@@ -17,7 +17,7 @@ import os
 import sys
 import time
 
-from common import can_up, can_down
+from common import can_up, can_down, print_can_msg
 
 
 if __name__ == "__main__":
@@ -41,12 +41,8 @@ if __name__ == "__main__":
         print(" Timestamp         | ID       | Data ->")
         print("+------------------+----------+------------------------+")
         while running:
-            message = bus.recv()    # wait until a message is received.
-            c = "{:f} | {:08x} | ".format(message.timestamp, message.arbitration_id)
-            s=""
-            for i in range(message.dlc ):
-                s +=  "{:02x} ".format(message.data[i])
-            print(" {}".format(c+s))
+            msg = bus.recv()    # wait until a message is received.
+            print_can_msg(msg)
             # Check for end of capture period (if set)
             if args.length: # defaults to 0, treated as infinite
                 if time.time() - start_time >= args.length:

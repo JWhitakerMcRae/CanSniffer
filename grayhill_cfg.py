@@ -15,7 +15,7 @@ import sys
 import time
 import os
 
-from common import can_up, can_down
+from common import can_up, can_down, print_can_msg
 
 
 SOURCE_ADDR = 0xFD
@@ -49,35 +49,43 @@ if __name__ == "__main__":
     try:
         # Button Send On Event = False
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x13,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
         # Button Transmit Period = 0 (no periodic transmission)
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x14,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
         # Indicator Status Send On Event = False
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x18,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
         # Indicator Status Transmit Period = 0 (no periodic transmission)
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x19,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
         if DISABLE_LED_COMM_TIMEOUT:
             # LED COMM Timeout Period = 0 (don't blink timeout indicator lights if no can traffic)
             msg = can.Message(arbitration_id=0x18EF80FD, data=[0x19,0x00], is_extended_id=False)
+            print_can_msg(msg)
             bus.send(msg)
             time.sleep(0.1)
         # Demo Mode = False (disable demo mode abiliity)
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x27,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
         # AUXIO1 Send On Event = False
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x2A,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
         # AUXIO1 TX Period = 0 (no periodic transmission)
         msg = can.Message(arbitration_id=0x18EF80FD, data=[0x2B,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
     except BaseException as err:
