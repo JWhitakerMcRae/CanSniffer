@@ -22,11 +22,13 @@ from common import can_up, can_down, print_can_msg
 
 if __name__ == "__main__":
     print("Starting CAN sniffer ...")
+
     # Parse CLI arguments
     parser = argparse.ArgumentParser(description="CAN sniffer")
     parser.add_argument("-b", "--baud", type=int, help="BAUD rate of CAN bus", default=250000)
     parser.add_argument("-l", "--length", type=int, help="length to run, in seconds (default: infinite)", default=0) 
     args = parser.parse_args()
+
     # Bring up CAN0 interface
     can_up(baud=args.baud)
     try:
@@ -34,6 +36,7 @@ if __name__ == "__main__":
     except OSError:
         print('\n\rCannot find PiCAN board!')
         sys.exit(os.EX_UNAVAILABLE)
+
     # Sniff loop (infinite or until --length seconds)
     start_time = time.time()
     running = True
@@ -54,6 +57,7 @@ if __name__ == "__main__":
         print("\n\rCaught unknown exception: {}".format(err))
         can_down()
         sys.exit(os.EX_PROTOCOL)
+
     # Bring down CAN0 interface before exit
     can_down()
     sys.exit(os.EX_OK)
