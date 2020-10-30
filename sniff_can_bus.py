@@ -24,7 +24,7 @@ if __name__ == "__main__":
     print("Starting CAN sniffer ...")
     # Parse CLI arguments
     parser = argparse.ArgumentParser(description="CAN sniffer")
-    parser.add_argument("-b", "--baud", type=int, help="BAUD rate of CAN bus")
+    parser.add_argument("-b", "--baud", type=int, help="BAUD rate of CAN bus", default=250000)
     parser.add_argument("-l", "--length", type=int, help="length to run, in seconds (default: infinite)", default=0) 
     args = parser.parse_args()
     # Bring up CAN0 interface

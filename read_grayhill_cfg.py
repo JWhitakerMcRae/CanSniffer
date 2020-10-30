@@ -78,7 +78,7 @@ if __name__ == "__main__":
         time.sleep(0.1)
         if DISABLE_LED_COMM_TIMEOUT:
             # LED COMM Timeout Period = 0 (don't blink timeout indicator lights if no can traffic)
-            msg = can.Message(arbitration_id=0x18EF80FD, data=[0x19], is_extended_id=True)
+            msg = can.Message(arbitration_id=0x18EF80FD, data=[0x1B], is_extended_id=True)
             print_can_msg(msg)
             bus.send(msg)
             msg = bus.recv()    # wait until a message is received.
