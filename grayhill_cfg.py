@@ -38,6 +38,7 @@ if __name__ == "__main__":
     print("Sending address claim message ...")
     try:
         msg = can.Message(arbitration_id=0x18EEFFFD, data=[0x00,0x00,0xC0,0x24,0x00,0x00,0x00,0x00], is_extended_id=False)
+        print_can_msg(msg)
         bus.send(msg)
         time.sleep(0.1)
     except BaseException as err:
