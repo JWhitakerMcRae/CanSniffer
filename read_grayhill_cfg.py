@@ -18,14 +18,21 @@ import os
 from common import can_up, can_down, print_can_msg
 
 
-SOURCE_ADDR = 0xFD
-MFG_CODE = 0x126
-
-DISABLE_LED_COMM_TIMEOUT = True
+config_payloads = (
+    [0x13],    # Button Send On Event
+    [0x14],    # Button Transmit Period
+    [0x18],    # Indicator Status Send On Event
+    [0x19],    # Indicator Status Transmit Period
+    [0x1A],    # Diagnostic Blink Period
+    [0x1B],    # LED COMM Timeout Period
+    [0x26],    # FLEXIO Config
+    [0x27],    # Demo Mode
+    [0x2A],    # AUXIO1 Send On Event
+    [0x2B])    # AUXIO1 TX Period
 
 
 if __name__ == "__main__":
-    print("Starting Grayhill config script ...")
+    print("Starting Grayhill read config script ...")
     # Bring up CAN0 interface at 250kbps
     can_up(baud=250000)
     try:
@@ -44,71 +51,20 @@ if __name__ == "__main__":
     except BaseException as err:
         print("\n\rFailed to send address claim message! Exception: {}".format(err))
         can_down()
-        sys.exit(os.EX_UNAVAILABLE)
+        sys.exit(os.EX_PROTOCOL)
     # Send out write configuration message(s)
     print("Sending read configuration message(s) ...")
     try:
-        # Button Send On Event = False
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x13], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
-        # Button Transmit Period = 0 (no periodic transmission)
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x14], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
-        # Indicator Status Send On Event = False
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x18], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
-        # Indicator Status Transmit Period = 0 (no periodic transmission)
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x19], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
-        if DISABLE_LED_COMM_TIMEOUT:
-            # LED COMM Timeout Period = 0 (don't blink timeout indicator lights if no can traffic)
-            msg = can.Message(arbitration_id=0x18EF80FD, data=[0x1B], is_extended_id=True)
+        for config_payload in config_payloads :
+            msg = can.Message(arbitration_id=0x18EF80FD, data=config_payload, is_extended_id=True)
             print_can_msg(msg)
             bus.send(msg)
             msg = bus.recv()    # wait until a message is received.
             print_can_msg(msg)
-            time.sleep(0.1)
-        # Demo Mode = False (disable demo mode abiliity)
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x27], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
-        # AUXIO1 Send On Event = False
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x2A], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
-        # AUXIO1 TX Period = 0 (no periodic transmission)
-        msg = can.Message(arbitration_id=0x18EF80FD, data=[0x2B], is_extended_id=True)
-        print_can_msg(msg)
-        bus.send(msg)
-        msg = bus.recv()    # wait until a message is received.
-        print_can_msg(msg)
-        time.sleep(0.1)
     except BaseException as err:
-        print("\n\rFailed to send write configuration message(s)! Exception: {}".format(err))
+        print("\n\rFailed to send read configuration message(s)! Exception: {}".format(err))
         can_down()
-        sys.exit(os.EX_UNAVAILABLE)
+        sys.exit(os.EX_PROTOCOL)
     # Bring down CAN0 interface before exit
     can_down()
     sys.exit(os.EX_OK)
