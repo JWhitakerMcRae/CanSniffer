@@ -13,7 +13,7 @@ Sniffer for CAN bus using the PiCAN2 HAT for the Raspberry Pi 3 B+.
 	`sudo apt install git`
 1. Add the following to the /boot/config.txt file and reboot:  
 	`dtparam=spi=on`  
-	`dtoverlay=mcp2515-can0-overlay,oscillator=16000000,interrupt=25`  
+	`dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25`  
 	`dtoverlay=spi-bcm2835-overlay`
 1. Clone this repo to your device:  
 	`git clone https://github.com/JWhitakerMcRae/CanSniffer.git`  
@@ -22,7 +22,7 @@ Sniffer for CAN bus using the PiCAN2 HAT for the Raspberry Pi 3 B+.
 	`pip3 install -r requirements.txt`
 
 ## Usage:
-1. Capture CAN data for attached bus at baud `<value>`, format is `timestamp (epoch) | arbitration id | data bytes`:
+1. Capture CAN data for attached bus at baud `<value>`, format is `timestamp (epoch) | arbitration id | data bytes`:  
 	`./sniff_can_bus.py --baud=<value>`
 
 **TIP:** Run `./sniff_can_bus.py --help` to see optional parameters.
