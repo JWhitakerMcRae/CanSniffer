@@ -40,7 +40,7 @@ if __name__ == "__main__":
     # Bring up CAN0 interface
     can_up(baud=args.baud)
     try:
-        bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
+        bus = can.interface.Bus(channel='can0', bustype='socketcan')
     except OSError:
         print('\n\rCannot find PiCAN board!')
         sys.exit(os.EX_UNAVAILABLE)
